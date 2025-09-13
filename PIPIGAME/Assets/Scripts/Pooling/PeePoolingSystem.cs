@@ -26,13 +26,9 @@ public class PeePoolingSystem : PoolingSystem
     {
         InvokeRepeating(nameof(SpawnProjectile), startDelay, spawnInterval);
     }
-    
-    private void OnDisable()
+
+    public void StopGenerator()
     {
         CancelInvoke(nameof(SpawnProjectile));
-        foreach (var projectile in pool)
-        {
-            Destroy(projectile.gameObject);
-        }
     }
 }

@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool canUseControls;
+    public bool canUseControls = false;
     public PeeController peeController;
 
 

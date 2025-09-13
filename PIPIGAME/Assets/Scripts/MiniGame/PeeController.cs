@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PeeController : MonoBehaviour
 {
-    [SerializeField] private PeePoolingSystem peeGenerator;
+    [SerializeField] public PeePoolingSystem peeGenerator;
     
     [SerializeField] private float minUpwardForce = -1f;
     [SerializeField] private float maxUpwardForce = 0f;
@@ -26,8 +27,13 @@ public class PeeController : MonoBehaviour
     private float rotationChangeTimer;
 
     public PlayerController.PlayerID playerID;
-    
-    
+
+    private void Start()
+    {
+        Init();
+    }
+
+
     public void Init()
     {
         currentUpwardForce = peeGenerator.upwardForce;
@@ -35,7 +41,6 @@ public class PeeController : MonoBehaviour
         targetRotationY = rotationTarget1;
         rotationChangeTimer = rotationChangeInterval;
         peeGenerator.playerID = this.playerID;
-        peeGenerator.StartGenerator();
     }
 
     public void MoveVertically(float direction)

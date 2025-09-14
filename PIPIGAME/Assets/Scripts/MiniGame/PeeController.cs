@@ -33,14 +33,31 @@ public class PeeController : MonoBehaviour
         Init();
     }
 
+    public void RestartPee()
+    {
+        peeGenerator.StartGenerator();
+    }
+
+    public void StopPee()
+    {
+        peeGenerator.StopGenerator();
+    }
+
 
     public void Init()
     {
+        peeGenerator.playerID = this.playerID;
         currentUpwardForce = peeGenerator.upwardForce;
         currentRotationY = peeGenerator.transform.eulerAngles.y;
-        targetRotationY = rotationTarget1;
+        
+        targetRotationY = playerID switch
+        {
+            PlayerController.PlayerID.Player1 => rotationTarget1,
+            PlayerController.PlayerID.Player2 => rotationTarget2,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        
         rotationChangeTimer = rotationChangeInterval;
-        peeGenerator.playerID = this.playerID;
     }
 
     public void MoveVertically(float direction)

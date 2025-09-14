@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public int scoreP1 = 0;
     public int scoreP2 = 0;
     
+    private int winningRoundP1 = 0;
+    private int winningRoundP2 = 0;
+    
     public FloatingScorePool scorePoolP1;
     public FloatingScorePool scorePoolP2;
 
@@ -55,10 +58,15 @@ public class GameManager : MonoBehaviour
             Debug.Log($"=== Début Round {i} ===");
             yield return StartCoroutine(RoundRoutine());
             Debug.Log($"=== Fin Round {i} ===");
+
+            if (winningRoundP1 == 2 || winningRoundP2 == 2)
+                break;
         }
         Debug.Log("Partie terminée !");
         StopGame();
     }
+    
+    
 
     public GameEvent currentEvent;
 
@@ -77,10 +85,17 @@ public class GameManager : MonoBehaviour
                 Debug.Log("wait");
                 yield return new WaitForSeconds(waitTime);
 
-                //currentEvent = ChoiceEvent(availableEvents);
-                Debug.Log("event");
-                //yield return StartCoroutine(currentEvent.EventRoutine());
-                currentEvent = null;
+                if (availableEvents.Count > 0)
+                {
+                    currentEvent = ChoiceEvent(availableEvents);
+                    Debug.Log("event");
+                    yield return StartCoroutine(currentEvent.EventRoutine());
+                    currentEvent = null;
+                }
+                else
+                {
+                    Debug.Log("no more event available");
+                }
             }
         }
 
@@ -89,6 +104,25 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(TimerRoutine(roundDuration, thisRound));
         
         PauseGame(true);
+        
+        GivePointRound();
+    }
+
+    public void GivePointRound()
+    {
+        if (scoreP1 > scoreP2)
+        {
+            winningRoundP1++;
+        }
+        else
+        {
+            winningRoundP2++;
+        }
+
+        scoreP1 = 0;
+        scoreP2 = 0;
+        scoreTextP1.text = scoreP1.ToString();
+        scoreTextP2.text = scoreP2.ToString();
     }
 
     public GameEvent ChoiceEvent(List<GameEvent> list)
@@ -113,6 +147,7 @@ public class GameManager : MonoBehaviour
         {
             currentEvent.StopAllCoroutines();
             currentEvent.StopEvent();
+            currentEvent = null;
         }
         Debug.Log(">>> Timer: round interrompu !");
     }

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public KeyCode down;
     public KeyCode left;
     public KeyCode right;
+    public KeyCode hold;
 
     private void Awake()
     {
@@ -32,12 +33,14 @@ public class PlayerController : MonoBehaviour
                 down = KeyCode.S;
                 left = KeyCode.A;
                 right = KeyCode.D;
+                hold = KeyCode.T;
                 break;
             case PlayerID.Player2 :
                 up = KeyCode.UpArrow;
                 down = KeyCode.DownArrow;
                 left = KeyCode.LeftArrow;
                 right = KeyCode.RightArrow;
+                hold = KeyCode.Y;
                 break;
         }
     }
@@ -64,6 +67,15 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey(left))
         {
             peeController.RotateHorizontally(-1);
+        }
+
+        if (Input.GetKeyDown(hold))
+        {
+            peeController.StopPee();
+        }
+        if (Input.GetKeyUp(hold))
+        {
+            peeController.RestartPee();
         }
     }
 }

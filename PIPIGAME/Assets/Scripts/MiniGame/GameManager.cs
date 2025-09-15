@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private CinematicController introCinematic;
     [SerializeField] private float gameDuration;
-    [SerializeField] private PlayerController player1;
-    [SerializeField] private PlayerController player2;
+    [SerializeField] public PlayerController player1;
+    [SerializeField] public PlayerController player2;
     
     public TMP_Text scoreTextP1;
     public TMP_Text scoreTextP2;

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PeePoolingSystem : PoolingSystem
 {
     [SerializeField] public float upwardForce = -0.55f;
-    [SerializeField] private float forwardForce = 3f;
+    [SerializeField] public float forwardForce = 3f;
     [SerializeField] private float gravityMultiplier = 3f;
     
     [SerializeField] private float startDelay = 0f;

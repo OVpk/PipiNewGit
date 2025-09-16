@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1121579894826411303}
   - component: {fileID: 4086734542337125871}
-  - component: {fileID: 8448139521615836503}
+  - component: {fileID: 2808096301370959440}
   m_Layer: 0
   m_Name: Mouche_1_0000
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8448139521615836503
+--- !u!95 &2808096301370959440
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
